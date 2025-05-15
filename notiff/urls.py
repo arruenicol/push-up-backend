@@ -8,6 +8,8 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+from notiff import views
+
 from users.views import UserViewSet
 from courses.views import CourseViewSet, CourseGroupViewSet
 from notifications.views import NotificationViewSet
@@ -21,6 +23,7 @@ router.register(r'notifications', NotificationViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
     
     # API URLs
     path('api/', include(router.urls)),

@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-_(lg@t-&4o3_i-91-hl76)69mhs*wbqb+l$1s&tw6!eoa1o%eh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [*]
 
 
 # Application definition
@@ -161,7 +161,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     "http://localhost:8080",
     "https://push-up-preu.vercel.app",
-    "https://pruebas-preuu.vercel.app"
+    "https://push-up-backend.onrender.com"
 ]
 
 # Firebase config

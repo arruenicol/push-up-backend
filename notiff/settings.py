@@ -160,8 +160,6 @@ SIMPLE_JWT = {
 # CORS configuration
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
-    "http://localhost:8080",
     "https://push-up-preu.vercel.app",
     "https://push-up-backend.onrender.com"
 ]

@@ -26,6 +26,7 @@ Django==5.2.1
 django-cors-headers==4.7.0
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.0
+dj-database-url==2.3.0
 executing==2.2.0
 fastjsonschema==2.21.1
 filelock==3.13.1

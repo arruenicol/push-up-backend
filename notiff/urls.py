@@ -16,7 +16,7 @@ from notifications.views import NotificationViewSet
 
 # Configuración del router
 router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
+router.register(r'users', UserViewSet, basename='user')
 router.register(r'courses', CourseViewSet)
 router.register(r'groups', CourseGroupViewSet)
 router.register(r'notifications', NotificationViewSet)

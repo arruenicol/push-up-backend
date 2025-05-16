@@ -104,7 +104,7 @@ DATABASES = {
         'USER': tmpPostgres.username,
         'PASSWORD': tmpPostgres.password,
         'HOST': tmpPostgres.hostname,
-        'PORT': tmpPostgres.port,
+        'PORT':  5432,
     }
 }
 

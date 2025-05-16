@@ -55,9 +55,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # <-- debe estar aquí arriba
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -182,9 +182,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://push-up-preu.vercel.app",
     "https://push-up-backend.onrender.com"
 ]
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'access-control-allow-origin',
-]
+CORS_ALLOW_HEADERS = list(default_headers)
 CORS_ALLOW_CREDENTIALS = True
 
 

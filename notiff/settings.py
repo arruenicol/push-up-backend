@@ -91,10 +91,16 @@ AUTH_USER_MODEL = 'users.User'
 
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
+# Asegura que el path sea string antes de usar lstrip
+pg_name = tmpPostgres.path
+if isinstance(pg_name, bytes):
+    pg_name = pg_name.decode()
+pg_name = pg_name.lstrip('/')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': tmpPostgres.path.lstrip('/'),
+        'NAME': pg_name,
         'USER': tmpPostgres.username,
         'PASSWORD': tmpPostgres.password,
         'HOST': tmpPostgres.hostname,

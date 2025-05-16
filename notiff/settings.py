@@ -15,6 +15,7 @@ from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
 from urllib.parse import urlparse
+from corsheaders.defaults import default_headers
 
 
 load_dotenv()
@@ -93,7 +94,7 @@ tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': tmpPostgres.path.decode().lstrip('/'),
+        'NAME': tmpPostgres.path.lstrip('/'),
         'USER': tmpPostgres.username,
         'PASSWORD': tmpPostgres.password,
         'HOST': tmpPostgres.hostname,
@@ -170,11 +171,16 @@ SIMPLE_JWT = {
 }
 
 # CORS configuration
-CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOWED_ORIGINS = [
     "https://push-up-preu.vercel.app",
     "https://push-up-backend.onrender.com"
 ]
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'access-control-allow-origin',
+]
+CORS_ALLOW_CREDENTIALS = True
+
 
 # Firebase config
 FIREBASE_CREDENTIALS_PATH = os.path.join(BASE_DIR, 'preu-uc-firebase-adminsdk-fbsvc-8c9ae0c533.json')

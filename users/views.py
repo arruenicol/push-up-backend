@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 from rest_framework import viewsets, status, permissions
@@ -7,7 +9,7 @@ from rest_framework.response import Response
 from .models import User
 from .serializers import UserSerializer, UserRegistrationSerializer, PushTokenSerializer
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer

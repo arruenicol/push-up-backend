@@ -1,8 +1,8 @@
+# backend/users/views.py
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
-# Create your views here.
 from rest_framework import viewsets, status, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -34,7 +34,14 @@ class UserViewSet(viewsets.ModelViewSet):
     def register_push_token(self, request):
         serializer = PushTokenSerializer(data=request.data)
         if serializer.is_valid():
-            request.user.push_token = serializer.validated_data['push_token']
-            request.user.save()
-            return Response({'status': 'token registered'})
+            # Check if user has a student profile
+            if hasattr(request.user, 'student'):
+                request.user.student.push_token = serializer.validated_data['push_token']
+                request.user.student.save()
+                return Response({'status': 'token registered'})
+            else:
+                return Response(
+                    {'error': 'Only students can register push tokens'}, 
+                    status=status.HTTP_400_BAD_REQUEST
+                )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

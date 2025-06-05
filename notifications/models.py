@@ -4,10 +4,10 @@ from courses.models import CourseGroup
 from users.models import User
 
 class NotificationType(models.TextChoices):
-    SCHEDULE_CHANGE = 'schedule', _('Schedule Change')
-    ROOM_CHANGE = 'room', _('Room Change')
-    NEWS = 'news', _('News')
-    ANNOUNCEMENT = 'announcement', _('Announcement')
+    SCHEDULE_CHANGE = 'schedule', _('Cambio de Horario')
+    ROOM_CHANGE = 'room', _('Cambio de Sala')
+    SUSPENSION = 'suspension', _('Suspensión de Clases')
+    ANNOUNCEMENT = 'announcement', _('Aviso')
 
 
 class Notification(models.Model):
@@ -19,7 +19,9 @@ class Notification(models.Model):
         choices=NotificationType.choices,
         default=NotificationType.ANNOUNCEMENT
     )
-    target_groups = models.ManyToManyField(CourseGroup, related_name='notifications')
+    target_groups = models.ManyToManyField(CourseGroup, blank=True, related_name='notifications')
+    target_emails = models.JSONField(default=list, blank=True)  # lista de correos individuales
+    target_campuses = models.JSONField(default=list, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     scheduled_for = models.DateTimeField(null=True, blank=True)
     sent = models.BooleanField(default=False)
